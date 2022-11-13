@@ -1,18 +1,21 @@
 import express from 'express'
 import cors from 'cors'
 import Routes from './routes/index.js'
+import dbConnection from './db/config.js'
 
 class Server {
   constructor() {
     this.app = express()
     this.port = process.env.PORT || 4000
 
-    // this.database()
+    this.database()
     this.middleware()
     this.router()
   }
 
-  // database() {}
+  database() {
+    dbConnection()
+  }
 
   middleware() {
     this.app.use(cors())
