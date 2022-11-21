@@ -1,9 +1,9 @@
 import { Router } from 'express'
+import { createNewUser, getAllUsers } from '../controllers/user.controller.js'
 
 const router = Router()
 
-router.get('/', (req, res) => {
-  res.send({ msg: 'testing the endpoint' })
-})
+router.get('/', getAllUsers)
+router.post('/', createNewUser)
 
 export default router
