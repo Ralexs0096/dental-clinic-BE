@@ -1,12 +1,24 @@
 import User from '../models/User.js'
+import bcrypt from 'bcrypt'
 
 export const createNewUser = async (req, res) => {
-  console.log(req.body)
   try {
+    const { email, password } = req.body
+
+    const userExist = await User.findOne({ email })
+    if (userExist) {
+      return res.status(400).json({
+        ok: false,
+        message: 'This email is already used'
+      })
+    }
+
     const newUser = new User(req.body)
+    const salt = bcrypt.genSalt()
+    newUser.password = bcrypt.hashSync(password, parseInt(salt))
     const userCreated = await newUser.save()
 
-    req.json({
+    res.status(201).json({
       ok: true,
       userCreated
     })
