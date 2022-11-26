@@ -31,9 +31,9 @@ export const createNewUser = async (req, res) => {
   }
 }
 
-export const getAllUsers = (_, res) => {
+export const getAllUsers = async (_, res) => {
   try {
-    const allUsers = User.findAll()
+    const allUsers = await User.find()
 
     if (allUsers.length > 0) {
       res.status(200).send({
