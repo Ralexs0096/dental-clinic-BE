@@ -40,6 +40,7 @@ export const getAllUsers = async (_, res) => {
         ok: true,
         allUsers
       })
+      return
     }
 
     res.status(204).send({
@@ -53,8 +54,4 @@ export const getAllUsers = async (_, res) => {
       msg: 'Something was wrong'
     })
   }
-}
-
-export const userLogin = (req, res) => {
-  // login here
 }
