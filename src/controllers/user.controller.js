@@ -42,3 +42,7 @@ export const getAllUsers = (_, res) => {
     })
   }
 }
+
+export const userLogin = (req, res) => {
+  // login here
+}
