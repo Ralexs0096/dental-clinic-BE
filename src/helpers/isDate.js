@@ -3,7 +3,7 @@ import { isValid } from 'date-fns'
 const isDate = value => {
   if (!value) return false
 
-  return isValid(value) ? true : false
+  return isValid(new Date(value))
 }
 
 export default isDate
