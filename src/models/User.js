@@ -7,7 +7,11 @@ const userSchema = new Schema(
     email: String,
     password: String,
     address: String,
-    phone: Number
+    phone: Number,
+    role: {
+      type: String,
+      default: 'user'
+    }
   },
   {
     timestamps: {

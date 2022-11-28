@@ -19,6 +19,11 @@ const appointmentSchema = new Schema(
     endTime: {
       type: Date,
       required: true
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
     }
   },
   {
