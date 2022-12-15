@@ -12,7 +12,7 @@ const routes = [
     route: AppointmentRoute
   },
   {
-    path: '/login',
+    path: '/auth',
     route: AuthRoute
   }
 ]
