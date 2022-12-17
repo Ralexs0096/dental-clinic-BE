@@ -1,16 +1,21 @@
 import express from 'express'
 import cors from 'cors'
-import Routes from './routes/index.js'
+import swaggerUI from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc'
+import { options } from './swaggerOptions.js'
 import dbConnection from './db/config.js'
+import Routes from './routes/index.js'
 
 class Server {
   constructor() {
     this.app = express()
     this.port = process.env.PORT || 4000
+    this.specs = swaggerJSDoc(options)
 
     this.database()
     this.middleware()
     this.router()
+    this.documentation()
   }
 
   database() {
@@ -21,6 +26,10 @@ class Server {
     this.app.use(cors())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+  }
+
+  documentation() {
+    this.app.use('/doc', swaggerUI.serve, swaggerUI.setup(this.specs))
   }
 
   router() {

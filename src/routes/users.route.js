@@ -5,7 +5,33 @@ import fieldValidator from '../middlewares/field-validator.js'
 
 const router = Router()
 
+/**
+ * @swagger
+ * user:
+ *   name: Users
+ *   description: User endpoints
+ */
+
+/**
+ * @swagger
+ * /user:
+ *  get:
+ *     summary: Get all available users
+ *     description: returns all users stored in the database when the requester has have permissions to see the users
+ *     responses:
+ *        200:
+ *          description: Returns all the users created
+ *     tags: [Users]
+ */
 router.get('/', getAllUsers)
+
+/**
+ * @swagger
+ * /user/create:
+ *  post:
+ *    summary: Create a new user
+ *    tags: [Users]
+ */
 router.post(
   '/create',
   [
