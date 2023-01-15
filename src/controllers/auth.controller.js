@@ -22,7 +22,7 @@ export const signUp = async (req, res) => {
 
   const createdUser = await user.save()
 
-  const token = generateToken()
+  const token = generateToken(createdUser._id) // provide the userId to sign the token
 
   res.json({ auth: true, token, userID: createdUser._id })
 }
