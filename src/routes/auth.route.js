@@ -6,6 +6,33 @@ import { verifyToken } from '../middlewares/verifyToken.js'
 
 const router = Router()
 
+/**
+ * @swagger
+ * user:
+ *   name: Auth
+ *   description: Auth endpoints
+ */
+
+/**
+ * @swagger
+ * /auth/signin:
+ *  post:
+ *    summary: allows a user to log in
+ *    tags: [Auth]
+ *    parameters:
+ *       - in: body
+ *         name: signup
+ *         schema:
+ *           type: object
+ *           required:
+ *             - email
+ *             - password
+ *           properties:
+ *             email:
+ *               type: string
+ *             password:
+ *               type: string
+ */
 router.post(
   '/signin',
   [
@@ -16,9 +43,32 @@ router.post(
     ).isLength({ min: 6 })
   ],
   fieldValidator,
-  signIn,
+  signIn
 )
 
+/**
+ * @swagger
+ * /auth/signup:
+ *  post:
+ *    summary: allows a user to create an account
+ *    tags: [Auth]
+ *    responses:
+ *       200:
+ *         description: Returns the user ID and the token generated
+ *    parameters:
+ *       - in: body
+ *         name: signup
+ *         schema:
+ *           type: object
+ *           required:
+ *             - email
+ *             - password
+ *           properties:
+ *             email:
+ *               type: string
+ *             password:
+ *               type: string
+ */
 router.post(
   '/signup',
   [
@@ -29,9 +79,33 @@ router.post(
     ).isLength({ min: 6 })
   ],
   fieldValidator,
-  signUp,
+  signUp
 )
 
+/**
+ * @swagger
+ * /me:
+ *  get:
+ *     summary: allows to validate the token provided to the endpoint
+ *     description:
+ *     responses:
+ *        200:
+ *          description: Returns all the users created
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: body
+ *         name: signup
+ *         schema:
+ *           type: object
+ *           required:
+ *             - email
+ *             - password
+ *           properties:
+ *             email:
+ *               type: string
+ *             password:
+ *               type: string
+ */
 router.get(
   '/me',
   verifyToken,
@@ -43,7 +117,7 @@ router.get(
     ).isLength({ min: 6 })
   ],
   fieldValidator,
-  isAuth,
+  isAuth
 )
 
 export default router

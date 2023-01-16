@@ -11,7 +11,53 @@ import fieldValidator from '../middlewares/field-validator.js'
 
 const router = Router()
 
+/**
+ * @swagger
+ * user:
+ *   name: Appointments
+ *   description: Appointments endpoints
+ */
+
+/**
+ * @swagger
+ * /appointment:
+ *  get:
+ *     summary: Get all appointments
+ *     description: return all the appointments created (need permissions)
+ *     responses:
+ *        200:
+ *          description: Returns all the appointments created
+ *     tags: [Appointments]
+ */
 router.get('/', getAllAppointments)
+
+/**
+ * @swagger
+ * /appointment:
+ *  post:
+ *    summary: Create a new appointment
+ *    tags: [Appointments]
+ *    parameters:
+ *       - in: body
+ *         name: signup
+ *         description: The user to create.
+ *         schema:
+ *           type: object
+ *           required:
+ *             - title
+ *             - user
+ *             - startTime
+ *             - endTime
+ *           properties:
+ *             title:
+ *                type: string
+ *             user:
+ *                type: string
+ *             startTime:
+ *                type: string
+ *             endTime:
+ *                type: string
+ */
 router.post(
   '/',
   [
@@ -23,7 +69,33 @@ router.post(
   fieldValidator,
   createNewAppointment
 )
+
+/**
+ * @swagger
+ * /appointment/:id:
+ *  put:
+ *    summary: allows to update an existing user by ID
+ *    tags: [Appointments]
+ *    parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         type: string
+ */
 router.put('/:id', updateAppointment)
+
+/**
+ * @swagger
+ * /appointment/:id:
+ *  delete:
+ *    summary: allows to delete an existing user by ID
+ *    tags: [Appointments]
+ *    parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         type: string
+ */
 router.delete('/:id', deleteAppointment)
 
 export default router

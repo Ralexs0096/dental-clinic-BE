@@ -31,6 +31,26 @@ router.get('/', getAllUsers)
  *  post:
  *    summary: Create a new user
  *    tags: [Users]
+ *    parameters:
+ *       - in: body
+ *         name: signup
+ *         description: The user to create.
+ *         schema:
+ *           type: object
+ *           required:
+ *             - firstName
+ *             - lastName
+ *             - email
+ *             - password
+ *           properties:
+ *             firstName:
+ *                type: string
+ *             lastName:
+ *                type: string
+ *             email:
+ *                type: string
+ *             password:
+ *                type: string
  */
 router.post(
   '/create',
