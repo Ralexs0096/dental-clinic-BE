@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-export async function verifyToken (req, res, next) {
+export async function verifyToken(req, res, next) {
   const token = req.headers['x-access-token']
   if (!token) {
     return res.status(401).json({
@@ -8,8 +8,18 @@ export async function verifyToken (req, res, next) {
       message: 'No token was provided'
     })
   }
-  const decoded = jwt.verify(token, process.env.SECRET)
-  req.userId = decoded.id
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) {
+      // more info:
+      // https://github.com/auth0/node-jsonwebtoken#tokenexpirederror
+      res.status(401).json({
+        ok: false,
+        ...err
+      })
+    } else {
+      req.userId = decoded.uid
+    }
+  })
+
   next()
 }
-
