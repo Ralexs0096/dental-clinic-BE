@@ -22,7 +22,7 @@ export const signUp = async (req, res) => {
 
   const createdUser = await user.save()
 
-  const token = generateToken(createdUser._id) // provide the userId to sign the token
+  const token = generateToken(createdUser._id, createdUser.email) // provide the userId to sign the token
 
   res.json({ auth: true, token, userID: createdUser._id })
 }
@@ -42,16 +42,16 @@ export const signIn = async (req, res) => {
     return res.status(401).json({ auth: false, token: null })
   }
 
-  const token = generateToken()
+  const token = generateToken(user._id, user.email) // provide the userId to sign the token
 
   res.status(200).json({ auth: true, token })
 }
 
 export const isAuth = async (req, res) => {
-  const user = await User.findById(req.userId, { password: 0 })
+  const user = await User.findById(req.userId)
 
   if (!user) {
     return res.status(404).send('The user was not found')
   }
-  res.json(user)
+  res.status(200).json({ auth: true, message: 'User is authenticated' })
 }

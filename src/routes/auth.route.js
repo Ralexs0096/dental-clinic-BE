@@ -84,40 +84,22 @@ router.post(
 
 /**
  * @swagger
- * /me:
+ * /auth/me:
  *  get:
  *     summary: allows to validate the token provided to the endpoint
  *     description:
  *     responses:
  *        200:
- *          description: Returns all the users created
+ *          description: return a confirmation message
+ *        400:
+ *          description: token is invalid or has expired
  *     tags: [Auth]
  *     parameters:
- *       - in: body
- *         name: signup
- *         schema:
- *           type: object
- *           required:
- *             - email
- *             - password
- *           properties:
- *             email:
- *               type: string
- *             password:
- *               type: string
+ *       - in: header
+ *         name: x-access-token
+ *         type: string
+ *         required: true
  */
-router.get(
-  '/me',
-  verifyToken,
-  [
-    check('email', 'Email is required').isEmail(),
-    check(
-      'password',
-      'password must contain a minimum of 6 characters'
-    ).isLength({ min: 6 })
-  ],
-  fieldValidator,
-  isAuth
-)
+router.get('/me', verifyToken, isAuth)
 
 export default router
