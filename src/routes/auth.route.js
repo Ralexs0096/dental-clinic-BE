@@ -84,7 +84,7 @@ router.post(
 
 /**
  * @swagger
- * /auth/me:
+ * /auth/isAuth:
  *  get:
  *     summary: allows to validate the token provided to the endpoint
  *     description:
@@ -100,6 +100,8 @@ router.post(
  *         type: string
  *         required: true
  */
-router.get('/me', verifyToken, isAuth)
+router.get('/isAuth', verifyToken, isAuth)
+
+// TODO: Add new endpoint /me that should return the user information (receives a user ID)
 
 export default router
