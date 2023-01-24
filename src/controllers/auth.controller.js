@@ -33,7 +33,9 @@ export const signIn = async (req, res) => {
   const user = await User.findOne({ email: email })
 
   if (!user) {
-    return res.status(404).send("The email provided doesn't exist.")
+    return res
+      .status(404)
+      .json({ ok: false, message: "The email provided doesn't exist" })
   }
 
   const isValidPassword = await user.validatePassword(password)
@@ -51,7 +53,9 @@ export const isAuth = async (req, res) => {
   const user = await User.findById(req.userId)
 
   if (!user) {
-    return res.status(404).send('The user was not found')
+    return res
+      .status(404)
+      .json({ ok: false, message: 'The user was not found' })
   }
   res.status(200).json({ auth: true, message: 'User is authenticated' })
 }
