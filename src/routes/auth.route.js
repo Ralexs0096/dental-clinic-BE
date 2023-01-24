@@ -19,6 +19,9 @@ const router = Router()
  *  post:
  *    summary: allows a user to log in
  *    tags: [Auth]
+ *    responses:
+ *      200:
+ *        description: Returns the user ID and the token generated
  *    parameters:
  *       - in: body
  *         name: signup
