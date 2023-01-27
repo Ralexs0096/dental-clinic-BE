@@ -109,8 +109,32 @@ router.post(
  *         required: true
  */
 router.get('/isAuth', verifyToken, isAuth)
-
-router.get('/forgotPassword', forgotPassword)
+/**
+ * @swagger
+ * /auth/forgotPassword:
+ *  post:
+ *    summary: allows the user to get a url to reset their password
+ *    tags: [Auth]
+ *    responses:
+ *       200:
+ *         description: Send a url to reset the password by email
+ *    parameters:
+ *       - in: body
+ *         name: forgot password
+ *         schema:
+ *           type: object
+ *           required:
+ *             - email
+ *           properties:
+ *             email:
+ *               type: string
+ */
+router.post(
+  '/forgotPassword',
+  [check('email', 'Email is required').isEmail()],
+  fieldValidator,
+  forgotPassword
+)
 
 // TODO: Add new endpoint to regenerate token
 
