@@ -12,6 +12,12 @@ const userSchema = new Schema(
     role: {
       type: String,
       default: 'user'
+    },
+    reset_password_token: {
+      type: String
+    },
+    reset_password_expires: {
+      type: Date
     }
   },
   {
@@ -22,7 +28,7 @@ const userSchema = new Schema(
   }
 )
 
-userSchema.methods.encryptPassword = async (password) =>{
+userSchema.methods.encryptPassword = async password => {
   const salt = await bcrypt.genSalt()
   return bcrypt.hashSync(password, parseInt(salt))
 }
