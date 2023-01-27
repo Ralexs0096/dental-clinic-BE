@@ -1,7 +1,12 @@
 import { Router } from 'express'
 import { check } from 'express-validator'
 import fieldValidator from '../middlewares/field-validator.js'
-import { signUp, signIn, isAuth } from '../controllers/auth.controller.js'
+import {
+  signUp,
+  signIn,
+  isAuth,
+  forgotPassword
+} from '../controllers/auth.controller.js'
 import { verifyToken } from '../middlewares/verifyToken.js'
 
 const router = Router()
@@ -104,6 +109,10 @@ router.post(
  *         required: true
  */
 router.get('/isAuth', verifyToken, isAuth)
+
+router.get('/forgotPassword', forgotPassword)
+
+// TODO: Add new endpoint to regenerate token
 
 // TODO: Add new endpoint /me that should return the user information (receives a user ID)
 
