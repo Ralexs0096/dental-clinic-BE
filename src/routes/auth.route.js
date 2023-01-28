@@ -1,7 +1,12 @@
 import { Router } from 'express'
 import { check } from 'express-validator'
 import fieldValidator from '../middlewares/field-validator.js'
-import { signUp, signIn, isAuth } from '../controllers/auth.controller.js'
+import {
+  signUp,
+  signIn,
+  isAuth,
+  forgotPassword
+} from '../controllers/auth.controller.js'
 import { verifyToken } from '../middlewares/verifyToken.js'
 
 const router = Router()
@@ -104,6 +109,34 @@ router.post(
  *         required: true
  */
 router.get('/isAuth', verifyToken, isAuth)
+/**
+ * @swagger
+ * /auth/forgotPassword:
+ *  post:
+ *    summary: allows the user to get a url to reset their password
+ *    tags: [Auth]
+ *    responses:
+ *       200:
+ *         description: Send a url to reset the password by email
+ *    parameters:
+ *       - in: body
+ *         name: forgot password
+ *         schema:
+ *           type: object
+ *           required:
+ *             - email
+ *           properties:
+ *             email:
+ *               type: string
+ */
+router.post(
+  '/forgotPassword',
+  [check('email', 'Email is required').isEmail()],
+  fieldValidator,
+  forgotPassword
+)
+
+// TODO: Add new endpoint to regenerate token
 
 // TODO: Add new endpoint /me that should return the user information (receives a user ID)
 
