@@ -8,6 +8,7 @@ import {
 import { check } from 'express-validator'
 import isDate from '../helpers/isDate.js'
 import fieldValidator from '../middlewares/field-validator.js'
+import { verifyToken } from '../middlewares/verifyToken.js'
 
 const router = Router()
 
@@ -29,7 +30,7 @@ const router = Router()
  *          description: Returns all the appointments created
  *     tags: [Appointments]
  */
-router.get('/', getAllAppointments)
+router.get('/', verifyToken, getAllAppointments)
 
 /**
  * @swagger
@@ -67,6 +68,7 @@ router.post(
     check('endTime', 'end time is required').custom(isDate)
   ],
   fieldValidator,
+  verifyToken,
   createNewAppointment
 )
 
@@ -82,7 +84,7 @@ router.post(
  *         required: true
  *         type: string
  */
-router.put('/:id', updateAppointment)
+router.put('/:id', verifyToken, updateAppointment)
 
 /**
  * @swagger
@@ -96,6 +98,6 @@ router.put('/:id', updateAppointment)
  *         required: true
  *         type: string
  */
-router.delete('/:id', deleteAppointment)
+router.delete('/:id', verifyToken, deleteAppointment)
 
 export default router
