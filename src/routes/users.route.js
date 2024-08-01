@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { check } from 'express-validator'
 import { createNewUser, getAllUsers } from '../controllers/user.controller.js'
 import fieldValidator from '../middlewares/field-validator.js'
+import { verifyToken } from '../middlewares/verifyToken.js'
 
 const router = Router()
 
@@ -23,7 +24,7 @@ const router = Router()
  *          description: Returns all the users created
  *     tags: [Users]
  */
-router.get('/', getAllUsers)
+router.get('/', verifyToken, getAllUsers)
 
 /**
  * @swagger
@@ -64,6 +65,7 @@ router.post(
     ).isLength({ min: 6 })
   ],
   fieldValidator,
+  verifyToken,
   createNewUser
 )
 
