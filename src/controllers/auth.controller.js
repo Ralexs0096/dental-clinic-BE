@@ -32,12 +32,12 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({ email: email })
+  const user = await User.findOne({ email })
 
   if (!user) {
     return res
       .status(404)
-      .json({ ok: false, message: "The email provided doesn't exist" })
+      .json({ ok: false, message: "The email provided does not match with any user" })
   }
 
   const isValidPassword = await user.validatePassword(password)
@@ -48,7 +48,7 @@ export const signIn = async (req, res) => {
 
   const token = generateToken(user._id, user.email) // provide the userId to sign the token
 
-  res.status(200).json({ auth: true, token })
+  res.status(200).json({ auth: true, token, user })
 }
 
 export const isAuth = async (req, res) => {
