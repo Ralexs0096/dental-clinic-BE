@@ -33,6 +33,12 @@ class Server {
   }
 
   router() {
+    this.app.use('/check', (_, res) => {
+      res.json({
+        alive: true
+      })
+    })
+
     Routes.forEach(({ path, route }) => {
       this.app.use(path, route)
     })
