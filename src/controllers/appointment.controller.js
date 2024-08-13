@@ -19,21 +19,21 @@ export const getAllAppointments = async (_, res) => {
 
 export const createNewAppointment = async (req, res) => {
   try {
-    const appointment = await new Appointment(req.body)
+    const appointment = new Appointment(req.body)
 
     // TODO: add the logged In user ID (createdBy)
 
     const appointmentCreated = await appointment.save()
 
-    res.status(201).json({
+    return res.status(201).json({
       ok: true,
       appointmentCreated
     })
   } catch (error) {
-    console.log(error)
+    console.log({ error })
     res.status(500).json({
       ok: false,
-      message: 'Something was wrong'
+      message: 'Something went wrong!'
     })
   }
 }
