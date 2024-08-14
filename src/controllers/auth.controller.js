@@ -4,9 +4,8 @@ import { generateToken } from '../helpers/generateToken.js'
 import Transporter from '../email/transport.js'
 
 export const signUp = async (req, res) => {
-  const { username, email, password } = req.body
 
-  const userExist = await User.findOne({ email })
+  const userExist = await User.findOne({ email: req.body.email })
   if (userExist) {
     return res.status(400).json({
       ok: false,
@@ -14,11 +13,7 @@ export const signUp = async (req, res) => {
     })
   }
 
-  const user = new User({
-    username,
-    email,
-    password
-  })
+  const user = new User(req.body)
 
   user.password = await user.encryptPassword(user.password)
 

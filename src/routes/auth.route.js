@@ -84,7 +84,9 @@ router.post(
     check(
       'password',
       'password must contain a minimum of 6 characters'
-    ).isLength({ min: 6 })
+    ).isLength({ min: 6 }),
+    check('firstName', 'first name should not be empty').trim().notEmpty(),
+    check('lastName', 'last name should not be empty').trim().notEmpty()
   ],
   fieldValidator,
   signUp
