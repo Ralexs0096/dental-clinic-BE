@@ -3,7 +3,7 @@ import Appointment from '../models/Appointment.js'
 export const getAllAppointments = async (_, res) => {
   const appointments =
     await Appointment.find()
-      .populate('user', '-password -updated_at -created_at')
+      .populate('user', '-password -updated_at -created_at -__v')
 
   if (appointments.length === 0) {
     return res.status(204)
@@ -11,7 +11,17 @@ export const getAllAppointments = async (_, res) => {
 
   res.status(200).json({
     ok: true,
-    appointments
+    appointments: appointments.map(
+      ({ _id, user, title, startTime, endTime, createdBy, description }) => ({
+        id: _id,
+        title,
+        description,
+        startTime,
+        endTime,
+        createdBy,
+        user
+      })
+    )
   })
 }
 
