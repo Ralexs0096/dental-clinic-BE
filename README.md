@@ -4,7 +4,9 @@
 
 The API endpoints for the CCL mentorship frontend application
 
-### DEV enviroment setup
+---
+
+### DEV environment setup
 
 Once the project is cloned, please install the latest dependencies:
 
@@ -12,18 +14,57 @@ Once the project is cloned, please install the latest dependencies:
 npm install
 ```
 
-NOTE: You'll need to do this any time package.json or package.lock changes.
+> **NOTE**: You'll need to do this any time `package.json` or `package-lock.json` changes.
 
-please take a look at env.example to set up the .env file in the root of the project (you need to set the environment variables for the project such as the DB URI and PORT of the server)
+---
 
-then, start the project:
+### Environment variables
+
+Please take a look at `.env.example` to set up your `.env` file in the root of the project.  
+You need to configure environment variables such as the **DB URI** and the **server PORT**.
+
+Example of `MONGODB_URI` (if using the Docker container):
+
+```env
+MONGODB_URI=mongodb://root:example@localhost:27017
+```
+
+---
+
+### Starting MongoDB locally with Docker
+
+To run a local MongoDB instance using Docker, follow these steps:
+
+1. Make sure Docker is installed and running on your system.
+2. In the root of the project, you have a file named `docker-compose.yml` which contains all the necessary instructions to create a container with mongo db
+3. Start the MongoDB service:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+This will create and start a MongoDB container accessible on `localhost:27017`.
+
+---
+
+### Start the project
+
+Once MongoDB is running and the `.env` file is configured, start the project:
 
 ```bash
 npm run dev
 ```
 
-now, the server is running on the defined **PORT** on the .env file or the default **4000**
+Now, the server will be running on the defined **PORT** in your `.env` file or the default **4000**.
+
+---
 
 ## Documentation
 
-to see the available endpoints you can use the doc swagger of this project by visiting **/doc** in the browser
+To see the available endpoints, you can use the Swagger docs by visiting:
+
+```
+http://localhost:<PORT>/doc
+```
+
+Replace `<PORT>` with the actual port used by your server.
