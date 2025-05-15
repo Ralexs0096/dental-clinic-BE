@@ -26,7 +26,7 @@ You need to configure environment variables such as the **DB URI** and the **ser
 Example of `MONGODB_URI` (if using the Docker container):
 
 ```env
-MONGODB_URI=mongodb://root:example@localhost:27017
+MONGODB_URI=mongodb://root:ThisIsTheRootPassword@localhost:27017
 ```
 
 ---
