@@ -18,10 +18,12 @@ export const signUp = async (req, res) => {
   user.password = await user.encryptPassword(user.password)
 
   const createdUser = await user.save()
+  const userToSend = createdUser.toObject()
+  delete userToSend.password
 
   const token = generateToken(createdUser._id, createdUser.email) // provide the userId to sign the token
 
-  res.json({ auth: true, token, userID: createdUser._id, user: createdUser })
+  res.json({ auth: true, token, userID: createdUser._id, user: userToSend })
 }
 
 export const signIn = async (req, res) => {
@@ -42,8 +44,10 @@ export const signIn = async (req, res) => {
   }
 
   const token = generateToken(user._id, user.email) // provide the userId to sign the token
+  const userToSend = user.toObject()
+  delete userToSend.password
 
-  res.status(200).json({ auth: true, token, user })
+  res.status(200).json({ auth: true, token, user: userToSend })
 }
 
 export const isAuth = async (req, res) => {
