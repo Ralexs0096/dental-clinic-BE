@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import morgan from 'morgan'
 import swaggerUI from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import { options } from './swaggerOptions.js'
@@ -26,6 +27,7 @@ class Server {
     this.app.use(cors())
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.app.use(morgan('tiny'))
   }
 
   documentation() {
