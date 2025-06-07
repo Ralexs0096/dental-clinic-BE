@@ -1,9 +1,10 @@
 import Appointment from '../models/Appointment.js'
 
 export const getAllAppointments = async (_, res) => {
-  const appointments =
-    await Appointment.find()
-      .populate('user', '-password -updated_at -created_at -__v')
+  const appointments = await Appointment.find().populate(
+    'user',
+    '-password -updated_at -created_at -__v'
+  )
 
   if (appointments.length === 0) {
     return res.status(204)
@@ -27,9 +28,10 @@ export const getAllAppointments = async (_, res) => {
 
 export const createNewAppointment = async (req, res) => {
   try {
-    const appointment = new Appointment(req.body)
-
-    // TODO: add the logged In user ID (createdBy)
+    const appointment = new Appointment({
+      ...req.body,
+      createdBy: req.userId
+    })
 
     const appointmentCreated = await appointment.save()
 
