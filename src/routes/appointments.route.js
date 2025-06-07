@@ -58,8 +58,8 @@ router.get('/', verifyToken, getAllAppointments)
  *                type: string
  *             endTime:
  *                type: string
- *            description:
- *               type: string
+ *             description:
+ *                type: string
  */
 router.post(
   '/',
