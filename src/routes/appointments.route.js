@@ -58,6 +58,8 @@ router.get('/', verifyToken, getAllAppointments)
  *                type: string
  *             endTime:
  *                type: string
+ *            description:
+ *               type: string
  */
 router.post(
   '/',
@@ -65,7 +67,8 @@ router.post(
     check('title', 'title is required').not().isEmpty(),
     check('user', 'user is required').not().isEmpty(),
     check('startTime', 'start time is required').custom(isDate),
-    check('endTime', 'end time is required').custom(isDate)
+    check('endTime', 'end time is required').custom(isDate),
+    check('description', 'description is required').not().isEmpty()
   ],
   fieldValidator,
   verifyToken,
