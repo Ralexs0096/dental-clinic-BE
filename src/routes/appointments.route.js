@@ -36,7 +36,7 @@ router.get('/', verifyToken, getAllAppointments)
  * @swagger
  * /appointment:
  *  post:
- *    summary: Create a new appointment
+ *    summary: Creates a new appointment
  *    tags: [Appointments]
  *    parameters:
  *       - in: body
@@ -79,7 +79,7 @@ router.post(
  * @swagger
  * /appointment/:id:
  *  put:
- *    summary: allows to update an existing user by ID
+ *    summary: allows updating an existing appointment by ID
  *    tags: [Appointments]
  *    parameters:
  *       - in: query
@@ -93,7 +93,7 @@ router.put('/:id', verifyToken, updateAppointment)
  * @swagger
  * /appointment/:id:
  *  delete:
- *    summary: allows to delete an existing user by ID
+ *    summary: allows to delete an existing appointment by ID
  *    tags: [Appointments]
  *    parameters:
  *       - in: query
