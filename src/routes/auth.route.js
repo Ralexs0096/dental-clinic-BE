@@ -140,6 +140,4 @@ router.post(
 
 // TODO: Add new endpoint to regenerate token
 
-// TODO: Add new endpoint /me that should return the user information (receives a user ID)
-
 export default router
