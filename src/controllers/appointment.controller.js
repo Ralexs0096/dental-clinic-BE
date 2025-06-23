@@ -1,10 +1,15 @@
 import Appointment from '../models/Appointment.js'
+import User from '../models/User.js'
 
-export const getAllAppointments = async (_, res) => {
-  const appointments = await Appointment.find().populate(
-    'user',
-    '-password -updated_at -created_at -__v'
-  )
+export const getAllAppointments = async (req, res) => {
+  const user = await User.findById(req.userId)
+
+  const isAdmin = user.role === 'admin'
+  const filter = isAdmin ? {} : { createdBy: user._id }
+
+  const appointments = await Appointment.find(filter)
+    .populate('createdBy', '-password -updated_at -created_at -__v')
+    .lean()
 
   if (appointments.length === 0) {
     return res.status(204)
