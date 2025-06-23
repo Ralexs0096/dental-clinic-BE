@@ -87,9 +87,9 @@ export const updateAppointment = async (req, res) => {
 
 export const deleteAppointment = async (req, res) => {
   try {
-    const appoitment = await Appointment.findById(req.params.id)
+    const appointment = await Appointment.findById(req.params.id)
 
-    if (!appoitment) {
+    if (!appointment) {
       return res.status(404).json({
         ok: false,
         msg: `appointment with ID ${req.params.id} does not exist`
@@ -98,11 +98,13 @@ export const deleteAppointment = async (req, res) => {
 
     // TODO: VALIDATE IF THE USER HAS PERMISSIONS TO DELETE
 
-    const appoitmentDeleted = await Appointment.findByIdAndDelete(req.params.id)
+    const appointmentDeleted = await Appointment.findByIdAndDelete(
+      req.params.id
+    )
 
     res.status(200).json({
       ok: true,
-      deleted: appoitmentDeleted
+      deleted: appointmentDeleted
     })
   } catch (error) {
     console.log(error)
