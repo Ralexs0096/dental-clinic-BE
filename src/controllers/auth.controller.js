@@ -4,7 +4,9 @@ import { generateToken } from '../helpers/generateToken.js'
 import Transporter from '../email/transport.js'
 
 export const signUp = async (req, res) => {
-  const userExist = await User.findOne({ email: req.body.email })
+  const userExist = await User.findOne({ email: req.body.email }).select(
+    '+password'
+  )
   if (userExist) {
     return res.status(400).json({
       ok: false,
@@ -28,15 +30,13 @@ export const signUp = async (req, res) => {
 export const signIn = async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email }).select('+password')
 
   if (!user) {
-    return res
-      .status(404)
-      .json({
-        ok: false,
-        message: 'The email provided does not match with any user'
-      })
+    return res.status(404).json({
+      ok: false,
+      message: 'The email provided does not match with any user'
+    })
   }
 
   const isValidPassword = await user.validatePassword(password)
