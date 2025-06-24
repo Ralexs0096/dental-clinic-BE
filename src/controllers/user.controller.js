@@ -28,9 +28,18 @@ export const createNewUser = async (req, res) => {
   }
 }
 
-
-export const getAllUsers = async (_, res) => {
+export const getAllUsers = async (req, res) => {
   try {
+    const requester = await User.findById(req.userId)
+
+    if (requester.role === 'user') {
+      res.send({
+        ok: true,
+        allUsers: []
+      })
+      return
+    }
+
     const allUsers = await User.find()
 
     if (allUsers.length > 0) {
