@@ -35,7 +35,15 @@ export const getAllUsers = async (req, res) => {
     if (requester.role === 'user') {
       res.send({
         ok: true,
-        allUsers: []
+        allUsers: [
+          {
+            id: requester._id,
+            email: requester.email,
+            role: 'user',
+            firstName: requester.firstName,
+            lastName: requester.lastName,
+          }
+        ]
       })
       return
     }
