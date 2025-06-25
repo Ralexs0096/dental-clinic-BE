@@ -2,10 +2,10 @@ import Appointment from '../models/Appointment.js'
 import User from '../models/User.js'
 
 export const getAllAppointments = async (req, res) => {
-  const user = await User.findById(req.userId)
+  const requester = await User.findById(req.userId)
 
-  const isAdmin = user.role === 'admin'
-  const filter = isAdmin ? {} : { createdBy: user._id }
+  const isAdmin = requester.role === 'admin'
+  const filter = isAdmin ? {} : { user: requester._id }
 
   const appointments = await Appointment.find(filter)
     .populate('createdBy', '-password -updated_at -created_at -__v')
