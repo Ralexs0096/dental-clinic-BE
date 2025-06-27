@@ -37,11 +37,7 @@ export const getAllUsers = async (req, res) => {
         ok: true,
         allUsers: [
           {
-            id: requester._id,
-            email: requester.email,
-            role: 'user',
-            firstName: requester.firstName,
-            lastName: requester.lastName,
+           ...requester
           }
         ]
       })
