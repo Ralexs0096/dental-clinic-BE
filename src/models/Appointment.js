@@ -23,6 +23,11 @@ const appointmentSchema = new Schema(
       type: Date,
       required: true
     },
+    status: {
+      type: String,
+      default: 'pending'
+    },
+    observations: String,
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: 'User',
