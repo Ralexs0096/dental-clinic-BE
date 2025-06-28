@@ -12,7 +12,10 @@ export const getAllAppointments = async (req, res) => {
     .lean()
 
   if (appointments.length === 0) {
-    return res.status(204)
+    return res.status(200).json({
+      ok: true,
+      appointments: []
+    })
   }
 
   res.status(200).json({
