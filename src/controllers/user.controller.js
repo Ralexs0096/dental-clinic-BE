@@ -36,9 +36,7 @@ export const getAllUsers = async (req, res) => {
       res.send({
         ok: true,
         allUsers: [
-          {
-           ...requester
-          }
+           requester
         ]
       })
       return
