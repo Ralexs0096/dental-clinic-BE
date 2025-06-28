@@ -21,14 +21,9 @@ export const getAllAppointments = async (req, res) => {
   res.status(200).json({
     ok: true,
     appointments: appointments.map(
-      ({ _id, user, title, startTime, endTime, createdBy, description }) => ({
+      ({ _id, ...rest }) => ({
         id: _id,
-        title,
-        description,
-        startTime,
-        endTime,
-        createdBy,
-        user
+        ...rest
       })
     )
   })
