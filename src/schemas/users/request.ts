@@ -10,4 +10,4 @@ export const createUserSchema = z.object({
   role: z.string()
 })
 
-export type CreateUserInput = z.infer<typeof createUserSchema>
+export type CreateUserBody = z.infer<typeof createUserSchema>
