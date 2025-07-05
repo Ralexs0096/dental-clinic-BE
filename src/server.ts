@@ -3,6 +3,11 @@ import { Server, IncomingMessage, ServerResponse } from 'http'
 import { dirname, join } from 'path'
 import AutoLoad from '@fastify/autoload'
 import Cors from '@fastify/cors'
+import type { ZodTypeProvider } from 'fastify-type-provider-zod'
+import {
+  serializerCompiler,
+  validatorCompiler
+} from 'fastify-type-provider-zod'
 import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -19,7 +24,10 @@ const config = {
 
 const createServer = () => {
   const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
-    fastify(config.serverOptions)
+    fastify(config.serverOptions).withTypeProvider<ZodTypeProvider>()
+
+  server.setValidatorCompiler(validatorCompiler)
+  server.setSerializerCompiler(serializerCompiler)
 
   server.register(Cors, {
     origin: true
