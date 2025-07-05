@@ -1,5 +1,11 @@
 import fastify, { FastifyInstance } from 'fastify'
 import { Server, IncomingMessage, ServerResponse } from 'http'
+import { dirname, join } from 'path'
+import AutoLoad from '@fastify/autoload'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 // Global config for the three main instance of fastify
 const config = {
@@ -13,6 +19,11 @@ const config = {
 const createServer = () => {
   const server: FastifyInstance<Server, IncomingMessage, ServerResponse> =
     fastify(config.serverOptions)
+
+  server.register(AutoLoad, {
+    dir: join(__dirname, 'routes'),
+    options: {}
+  })
 
   server.setNotFoundHandler(function custom404(_, reply) {
     reply.send({
