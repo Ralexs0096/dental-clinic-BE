@@ -1,9 +1,12 @@
 import { FastifyPluginAsync } from 'fastify'
-import postUserRoute from './routes.post'
-import getUserRoute from './routes.get'
+import postUserRoutes from './routes.post'
+import getUserRoutes from './routes.get'
 
 const usersRoutes: FastifyPluginAsync = async (fastify, opts) => {
-  await Promise.all([getUserRoute(fastify, opts), postUserRoute(fastify, opts)])
+  await Promise.all([
+    getUserRoutes(fastify, opts),
+    postUserRoutes(fastify, opts)
+  ])
 }
 
 export default usersRoutes

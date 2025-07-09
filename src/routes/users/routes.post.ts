@@ -3,7 +3,7 @@ import { createUserSchema } from '../../schemas/users/request'
 import { createUserHandler } from '../../handlers/users/createUser.handler'
 import z from 'zod'
 
-const postUserRoute: FastifyPluginAsync = async fastify => {
+const postUserRoutes: FastifyPluginAsync = async fastify => {
   fastify.post(
     '/',
     {
@@ -21,4 +21,4 @@ const postUserRoute: FastifyPluginAsync = async fastify => {
   )
 }
 
-export default postUserRoute
+export default postUserRoutes
