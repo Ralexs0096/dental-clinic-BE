@@ -6,6 +6,8 @@
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "experimentalDecorators": true, // required for typegoose
+    "emitDecoratorMetadata": true, // required for typegoose
     "outDir": "dist",
     "baseUrl": "./src",
     "skipLibCheck": true
