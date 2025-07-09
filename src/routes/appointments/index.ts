@@ -1,20 +1,12 @@
 import { FastifyPluginAsync } from 'fastify'
+import getAppointmentRoute from './routes.get'
+import postAppointmentRoutes from './routes.post'
 
-const appointmentsRoutes: FastifyPluginAsync = async fastify => {
-  fastify.get('/', async () => {
-    return [
-      {
-        id: 1,
-        title: 'my first appointment'
-      }
-    ]
-  })
-
-  fastify.post('/', async (req, reply) => {
-    const appointment = req.body
-
-    reply.code(201).send(appointment)
-  })
+const usersRoutes: FastifyPluginAsync = async (fastify, opts) => {
+  await Promise.all([
+    getAppointmentRoute(fastify, opts),
+    postAppointmentRoutes(fastify, opts)
+  ])
 }
 
-export default appointmentsRoutes
+export default usersRoutes
