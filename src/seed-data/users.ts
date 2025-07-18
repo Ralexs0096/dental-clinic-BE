@@ -1,4 +1,14 @@
-export const usersData = [
+interface User {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  address: string
+  role: string
+  phone: number
+}
+
+export const usersData: User[] = [
   {
     firstName: 'Juan',
     lastName: 'Pérez',

@@ -1,4 +1,10 @@
-export const appointmentsData = [
+interface Appointment {
+  title: string
+  description: string
+  startTime: Date
+  endTime: Date
+}
+export const appointmentsData: Appointment[] = [
   {
     title: 'Dental Cleaning',
     description: 'Routine dental cleaning and checkup',
