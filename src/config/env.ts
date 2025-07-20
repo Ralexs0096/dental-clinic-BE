@@ -5,9 +5,9 @@ loadEnv()
 
 const envSchema = z.object({
   PORT: z.coerce.number().default(8080),
-  MONGODB_URI: z
+  DATABASE_URL: z
     .string()
-    .url({ message: 'MONGODB_URI must be a valid MongoDB URI' }),
+    .url({ message: 'DATABASE_URL must be a valid MongoDB URI' }),
   SECRET: z.string().min(10, 'SECRET must be at least 10 characters'),
   SERVICE: z.enum(['hotmail', 'gmail']),
   EMAIL_USERNAME: z.string().optional(),
