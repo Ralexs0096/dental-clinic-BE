@@ -10,6 +10,7 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
+      "@/*": ["./src/*"],
       "@prisma": ["./generated/prisma"],
       "@schemas/*": ["./src/schemas/*"]
     }

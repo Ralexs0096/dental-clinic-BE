@@ -1,4 +1,4 @@
-import { env } from 'config/env'
+import { env } from '@/config/env'
 import CreateServer from './server'
 
 const server = CreateServer()

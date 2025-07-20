@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify'
-import { createUserSchema } from '../../schemas/users/request'
-import { createUserHandler } from '../../handlers/users/createUser.handler'
+import { createUserSchema } from '@/schemas/users/request'
+import { createUserHandler } from '@/handlers/users/createUser.handler'
 import z from 'zod'
 
 const postUserRoutes: FastifyPluginAsync = async fastify => {
