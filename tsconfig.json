@@ -7,8 +7,12 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "outDir": "dist",
-    "baseUrl": "./src",
-    "skipLibCheck": true
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "paths": {
+      "@prisma": ["./generated/prisma"],
+      "@schemas/*": ["./src/schemas/*"]
+    }
   },
   "include": ["src"]
 }
