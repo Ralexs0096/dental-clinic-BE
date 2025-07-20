@@ -1,5 +1,5 @@
-import Appointment from '../models/Appointment.js'
-import User from '../models/User.js'
+import Appointment from '../../models/Appointment.js'
+import User from '../../models/User.js'
 
 export const getAllAppointments = async (req, res) => {
   const requester = await User.findById(req.userId)
@@ -20,12 +20,10 @@ export const getAllAppointments = async (req, res) => {
 
   res.status(200).json({
     ok: true,
-    appointments: appointments.map(
-      ({ _id, ...rest }) => ({
-        id: _id,
-        ...rest
-      })
-    )
+    appointments: appointments.map(({ _id, ...rest }) => ({
+      id: _id,
+      ...rest
+    }))
   })
 }
 
