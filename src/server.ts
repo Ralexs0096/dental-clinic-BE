@@ -34,6 +34,14 @@ const createServer = () => {
   })
 
   server.register(AutoLoad, {
+    dir: join(__dirname, 'plugins')
+  })
+
+  server.register(AutoLoad, {
+    dir: join(__dirname, 'hooks')
+  })
+
+  server.register(AutoLoad, {
     dir: join(__dirname, 'routes'),
     options: {}
   })
