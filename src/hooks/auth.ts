@@ -12,7 +12,7 @@ const authHook = async (fastify: FastifyInstance) => {
   fastify.addHook(
     'preHandler',
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const publicPaths = ['/auth/login', '/auth/register']
+      const publicPaths = ['/auth/signin', '/auth/signup']
 
       if (publicPaths.includes(request.originalUrl)) {
         return
