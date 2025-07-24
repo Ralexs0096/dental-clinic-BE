@@ -1,7 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify'
-import z from 'zod'
 import { listUsersHandler } from '@/handlers/users/listUsers.handler'
-import { UserBody, userSchema } from '@/schemas/users/response'
+import { GetUsersSchema, UserBody } from '@/schemas/users/response'
 
 export type GetUsersRoute = {
   Reply: {
@@ -16,10 +15,7 @@ const getUserRoutes: FastifyPluginAsync = async fastify => {
     {
       schema: {
         response: {
-          200: z.object({
-            ok: z.literal(true),
-            users: z.array(userSchema)
-          })
+          200: GetUsersSchema
         }
       }
     },

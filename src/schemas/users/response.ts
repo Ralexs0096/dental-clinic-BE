@@ -10,4 +10,9 @@ export const userSchema = z.object({
   phone: z.number().nullable().optional()
 })
 
+export const GetUsersSchema = z.object({
+  ok: z.literal(true),
+  users: z.array(userSchema)
+})
+
 export type UserBody = z.infer<typeof userSchema>
