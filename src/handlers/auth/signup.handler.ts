@@ -41,9 +41,12 @@ export const signupHandler: RouteHandler<PostSignUpRoute> = async (
       }
     })
 
+    const token = req.server.generateToken(newUser.id)
+
     reply.code(201).send({
       ok: true,
-      user: newUser
+      user: newUser,
+      token
     })
   } catch (error) {
     console.error(error)
