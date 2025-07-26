@@ -1,5 +1,5 @@
 import { signupHandler } from '@/handlers/auth/signup.handler'
-import { SignUpBody, singUpSchema } from '@/schemas/auth/request'
+import { SignUpBody, signUpSchemaBody } from '@/schemas/auth/request'
 import type { FastifyPluginAsync } from 'fastify'
 import z from 'zod'
 
@@ -28,7 +28,7 @@ const postAuthRoutes: FastifyPluginAsync = async fastify => {
     '/signup',
     {
       schema: {
-        body: singUpSchema
+        body: signUpSchemaBody
       }
     },
     signupHandler
