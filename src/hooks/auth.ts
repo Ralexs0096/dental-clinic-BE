@@ -12,14 +12,16 @@ const authHook = async (fastify: FastifyInstance) => {
   fastify.addHook(
     'preHandler',
     async (request: FastifyRequest, reply: FastifyReply) => {
-      const publicPaths = ['/auth/signin', '/auth/signup']
+      const publicPaths = ['/auth/signin', '/auth/signup', '/check']
 
       if (publicPaths.includes(request.originalUrl)) {
         return
       }
 
       try {
-        await request.jwtVerify()
+        const decoded = await request.jwtVerify<{ sub: string }>()
+
+        request.userId = decoded.sub
 
         fastify.log.info(`Authenticated user: ${request.userId}`)
       } catch (error) {
