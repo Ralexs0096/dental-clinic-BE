@@ -2,6 +2,7 @@ import { RouteHandler } from 'fastify'
 import { PrismaClient } from '@prisma'
 import { PostSignUpRoute } from '@/routes/auth/routes.post'
 import { hash } from 'bcrypt-ts'
+import { USER_ROLES } from '@/config/constants'
 
 export const signupHandler: RouteHandler<PostSignUpRoute> = async (
   req,
@@ -20,7 +21,7 @@ export const signupHandler: RouteHandler<PostSignUpRoute> = async (
     if (existingUser?.id) {
       return reply.code(409).send({
         ok: false,
-        message: 'Email already exist'
+        message: 'Email already exist.'
       })
     }
 
@@ -30,7 +31,8 @@ export const signupHandler: RouteHandler<PostSignUpRoute> = async (
       data: {
         email,
         password: hashedPassword,
-        ...rest
+        ...rest,
+        role: USER_ROLES.User
       },
       select: {
         id: true,
