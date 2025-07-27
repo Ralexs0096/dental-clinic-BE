@@ -4,7 +4,7 @@ import { userSchema } from '../users/response'
 const userWithoutId = userSchema.omit({ id: true, role: true })
 
 /**
- * **************** /signup ****************
+ * **************** /signup - post ****************
  */
 export const signUpSchemaBody = z.object({
   ...userWithoutId.shape,
@@ -14,7 +14,7 @@ export const signUpSchemaBody = z.object({
 export type SignUpBody = z.infer<typeof signUpSchemaBody>
 
 /**
- * **************** /signin ****************
+ * **************** /signin - post ****************
  */
 export const signInSchemaBody = z.object({
   email: z.string(),
