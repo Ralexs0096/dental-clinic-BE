@@ -1,27 +1,30 @@
+import { signinHandler } from '@/handlers/auth/signin.handler'
 import { signupHandler } from '@/handlers/auth/signup.handler'
-import { SignUpBody, signUpSchemaBody } from '@/schemas/auth/request'
+import {
+  SignInBody,
+  signInSchemaBody,
+  SignUpBody,
+  signUpSchemaBody
+} from '@/schemas/auth/request'
 import type { FastifyPluginAsync } from 'fastify'
-import z from 'zod'
 
 export type PostSignUpRoute = {
   Body: SignUpBody
 }
 
+export type PostSignInRoute = {
+  Body: SignInBody
+}
+
 const postAuthRoutes: FastifyPluginAsync = async fastify => {
-  fastify.post(
+  fastify.post<PostSignInRoute>(
     '/signin',
     {
       schema: {
-        response: {
-          501: z.object({
-            message: z.string()
-          })
-        }
+        body: signInSchemaBody
       }
     },
-    async (_, reply) => {
-      return reply.code(501).send({ message: 'No implemented yet' })
-    }
+    signinHandler
   )
 
   fastify.post<PostSignUpRoute>(
