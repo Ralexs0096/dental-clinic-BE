@@ -3,10 +3,15 @@ import { listUsersHandler } from '@/handlers/users/listUsers.handler'
 import { GetUsersSchema, UserBody } from '@/schemas/users/response'
 
 export type GetUsersRoute = {
-  Reply: {
-    ok: boolean
-    users: UserBody[]
-  }
+  Reply:
+    | {
+        ok: boolean
+        users: UserBody[]
+      }
+    | {
+        ok: boolean
+        message: string
+      }
 }
 
 const getUserRoutes: FastifyPluginAsync = async fastify => {
