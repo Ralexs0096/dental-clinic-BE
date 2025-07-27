@@ -10,7 +10,7 @@ export const createUserSchema = z.object({
   password: z.string(),
   address: z.string(),
   phone: z.number().optional(),
-  role: z.string().optional()
+  role: z.string().min(4).max(5).optional()
 })
 
 export type CreateUserBody = z.infer<typeof createUserSchema>
