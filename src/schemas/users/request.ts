@@ -1,5 +1,8 @@
 import { z } from 'zod'
 
+/**
+ * **************** /user - post ****************
+ */
 export const createUserSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
@@ -7,7 +10,7 @@ export const createUserSchema = z.object({
   password: z.string(),
   address: z.string(),
   phone: z.number().optional(),
-  role: z.string()
+  role: z.string().optional()
 })
 
 export type CreateUserBody = z.infer<typeof createUserSchema>
